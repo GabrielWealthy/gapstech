@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { buildWhatsAppUrl } from "@/lib/utils";
+import HeroBackground from "@/components/sections/HeroBackground";
 
 const WHATSAPP_URL = buildWhatsAppUrl(
   "+14328477432",
@@ -11,7 +12,9 @@ const WHATSAPP_URL = buildWhatsAppUrl(
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-red-glow px-6 pb-24 pt-28 text-center">
+    <section className="relative overflow-hidden px-6 pb-24 pt-28 text-center">
+      <HeroBackground />
+
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
