@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -15,9 +18,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gapstech — No-Code & Automation Studio",
+  title: "Gapstech — Innovate. Build. Elevate.",
   description:
-    "Gapstech builds SaaS platforms, apps, and automations with Bubble.io, FlutterFlow, n8n, and AWS.",
+    "AI Engineer & No-Code/Low-Code Developer specializing in automation (n8n), cloud infrastructure (AWS), and CRM systems.",
+  icons: { icon: "/images/logo/gapstech-mark.png" },
+  openGraph: {
+    title: "Gapstech — Innovate. Build. Elevate.",
+    description:
+      "AI Engineer & No-Code/Low-Code Developer specializing in automation (n8n), cloud infrastructure (AWS), and CRM systems.",
+    images: ["/images/logo/gapstech-logo.png"],
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="font-body bg-ink text-white antialiased">
-        {children}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
