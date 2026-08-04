@@ -2,15 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/content/nav";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink-border bg-ink/80 backdrop-blur-md">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors duration-300",
+        scrolled
+          ? "border-ink-border bg-ink/90 backdrop-blur-md shadow-[0_1px_0_rgba(232,38,42,0.15)]"
+          : "border-transparent bg-transparent"
+      )}
+    >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/images/logo/gapstech-mark.png" alt="Gapstech" width={36} height={36} priority />
@@ -22,11 +37,9 @@ export default function Navbar() {
         <ul className="hidden gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm text-muted transition-colors hover:text-red"
-              >
+              <Link href={link.href} className="group relative text-sm text-muted transition-colors hover:text-white">
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-red transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
             </li>
           ))}

@@ -10,6 +10,8 @@ const WHATSAPP_URL = buildWhatsAppUrl(
   "Hi Gapstech, I'd like to discuss a project"
 );
 
+const STACK_CHIPS = ["n8n", "AWS", "Bubble.io", "FlutterFlow", "GoHighLevel"];
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden px-6 pb-24 pt-28 text-center">
@@ -63,6 +65,25 @@ export default function Hero() {
         >
           Chat on WhatsApp
         </a>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5, staggerChildren: 0.08 }}
+        className="mx-auto mt-12 flex max-w-xl flex-wrap items-center justify-center gap-2"
+      >
+        {STACK_CHIPS.map((chip, i) => (
+          <motion.span
+            key={chip}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.5 + i * 0.06 }}
+            className="rounded-full border border-ink-border bg-ink-panel px-4 py-1.5 text-xs text-muted"
+          >
+            {chip}
+          </motion.span>
+        ))}
       </motion.div>
     </section>
   );
