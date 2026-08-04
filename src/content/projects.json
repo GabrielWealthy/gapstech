@@ -1,0 +1,35 @@
+[
+  {
+    "id": "placeholder-project-one",
+    "title": "Placeholder Project One",
+    "summary": "One-line description of the project goes here.",
+    "description": "Full description of the project. **Markdown is supported** — you can use bold, lists, and links here.",
+    "coverImage": "/images/projects/placeholder-one.jpg",
+    "tags": ["Bubble.io", "SaaS", "Web App"],
+    "liveUrl": "https://example.com",
+    "repoUrl": "",
+    "date": "2026-01"
+  },
+  {
+    "id": "placeholder-project-two",
+    "title": "Placeholder Project Two",
+    "summary": "One-line description of the project goes here.",
+    "description": "Full description of the project. **Markdown is supported** — you can use bold, lists, and links here.",
+    "coverImage": "/images/projects/placeholder-two.jpg",
+    "tags": ["FlutterFlow", "Mobile App"],
+    "liveUrl": "https://example.com",
+    "repoUrl": "",
+    "date": "2025-11"
+  },
+  {
+    "id": "placeholder-project-three",
+    "title": "Placeholder Project Three",
+    "summary": "One-line description of the project goes here.",
+    "description": "Full description of the project. **Markdown is supported** — you can use bold, lists, and links here.",
+    "coverImage": "/images/projects/placeholder-three.jpg",
+    "tags": ["n8n", "Automation"],
+    "liveUrl": "",
+    "repoUrl": "",
+    "date": "2025-09"
+  }
+]
