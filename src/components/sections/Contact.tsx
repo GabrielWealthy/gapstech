@@ -12,8 +12,8 @@ const WHATSAPP_URL = buildWhatsAppUrl(
 
 export default function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
-      <RevealHeading title="Contact" />
+    <section id="contact" className="mx-auto max-w-6xl px-6 py-28">
+      <RevealHeading title="Contact" from="left" />
 
       <div className="mt-10 grid gap-12 md:grid-cols-2">
         <motion.div
