@@ -17,13 +17,13 @@ export function pickFeatured(projects: Project[]): {
 }
 
 /* Tags are free-text in the admin form, so marketing sentences sometimes
-   land in the field. A real tag is short and at most two words ("n8n",
-   "Web App"); anything longer is a tagline and would render as a broken
+   land in the field. A real tag is short and at most three words ("n8n",
+   "Business Intelligence"); anything longer is a tagline and would render as a broken
    category row, so it is dropped rather than shown. */
 export function displayTags(tags: string[], limit = 5): string[] {
   return tags
     .map((t) => t.trim())
-    .filter((t) => t.length > 0 && t.length <= 20 && t.split(/\s+/).length <= 2)
+    .filter((t) => t.length > 0 && t.length <= 24 && t.split(/\s+/).length <= 3)
     .slice(0, limit);
 }
 
