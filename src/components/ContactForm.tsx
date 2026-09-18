@@ -3,6 +3,14 @@
 import { useState, useTransition } from "react";
 import { submitContactMessage } from "@/app/actions/contact";
 
+type Field = "name" | "email" | "message";
+
+const FIELDS: { id: Field; label: string; type: string; rows?: number }[] = [
+  { id: "name", label: "Your name", type: "text" },
+  { id: "email", label: "Email address", type: "email" },
+  { id: "message", label: "What are you trying to build?", type: "textarea", rows: 5 },
+];
+
 export default function ContactForm() {
   const [values, setValues] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -25,55 +33,90 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <p className="rounded-xl border border-red/30 bg-red/10 p-6 text-sm text-white">
-        Thanks — your message has been sent. I&apos;ll get back to you soon.
-      </p>
+      <div
+        role="status"
+        className="border-l border-accent bg-accent-wash px-6 py-5"
+      >
+        <p className="font-display text-lg font-semibold">Message sent</p>
+        <p className="mt-1.5 text-sm text-muted">
+          I&apos;ll come back to you, usually the same day. If it&apos;s urgent,
+          WhatsApp is faster.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-4 font-mono text-meta uppercase text-accent underline underline-offset-4"
+        >
+          Send another
+        </button>
+      </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <input
-          type="text"
-          placeholder="Name"
-          value={values.name}
-          onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
-          className="w-full rounded-lg border border-ink-border bg-ink-panel px-4 py-3 text-sm text-white placeholder:text-faint focus:border-red focus:outline-none"
-        />
-        {errors.name && <p className="mt-1 text-xs text-red">{errors.name}</p>}
-      </div>
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+      {FIELDS.map((field) => {
+        const error = errors[field.id];
+        const describedBy = error ? `${field.id}-error` : undefined;
 
-      <div>
-        <input
-          type="email"
-          placeholder="Email"
-          value={values.email}
-          onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
-          className="w-full rounded-lg border border-ink-border bg-ink-panel px-4 py-3 text-sm text-white placeholder:text-faint focus:border-red focus:outline-none"
-        />
-        {errors.email && <p className="mt-1 text-xs text-red">{errors.email}</p>}
-      </div>
+        const shared = {
+          id: field.id,
+          name: field.id,
+          value: values[field.id],
+          "aria-invalid": error ? true : undefined,
+          "aria-describedby": describedBy,
+          onChange: (
+            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => setValues((v) => ({ ...v, [field.id]: e.target.value })),
+          className: `w-full border-b bg-transparent py-3 text-base text-foreground outline-none transition-colors duration-300 placeholder:text-faint ${
+            error
+              ? "border-accent"
+              : "border-line-strong focus:border-accent hover:border-muted"
+          }`,
+        };
 
-      <div>
-        <textarea
-          placeholder="Message"
-          rows={5}
-          value={values.message}
-          onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
-          className="w-full rounded-lg border border-ink-border bg-ink-panel px-4 py-3 text-sm text-white placeholder:text-faint focus:border-red focus:outline-none"
-        />
-        {errors.message && <p className="mt-1 text-xs text-red">{errors.message}</p>}
-      </div>
+        return (
+          <div key={field.id}>
+            <label
+              htmlFor={field.id}
+              className="block font-mono text-meta uppercase text-faint"
+            >
+              {field.label}
+            </label>
 
-      {errors.form && <p className="text-xs text-red">{errors.form}</p>}
+            {field.type === "textarea" ? (
+              <textarea {...shared} rows={field.rows} className={`${shared.className} resize-none`} />
+            ) : (
+              <input {...shared} type={field.type} />
+            )}
+
+            {error && (
+              <p id={describedBy} role="alert" className="mt-2 text-sm text-accent">
+                {error}
+              </p>
+            )}
+          </div>
+        );
+      })}
+
+      {errors.form && (
+        <p role="alert" className="text-sm text-accent">
+          {errors.form}
+        </p>
+      )}
 
       <button
         type="submit"
         disabled={isPending}
-        className="rounded-full bg-red px-8 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-red-dim disabled:opacity-60"
+        className="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-accent-bright disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {isPending ? "Sending..." : "Send Message"}
+        {isPending ? "Sending…" : "Send message"}
+        <svg
+          width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"
+          className="transition-transform duration-300 group-hover:translate-x-1"
+        >
+          <path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
     </form>
   );

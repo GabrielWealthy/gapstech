@@ -1,0 +1,17 @@
+export const TOOLS = [
+  "n8n",
+  "Bubble.io",
+  "FlutterFlow",
+  "AWS",
+  "GoHighLevel",
+  "Vercel",
+  "Netlify",
+  "Supabase",
+  "OpenAI",
+  "Anthropic Claude",
+  "Zapier",
+  "Figma",
+  "Google Workspace",
+  "Calendly",
+  "Stripe",
+];

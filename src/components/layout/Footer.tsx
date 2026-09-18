@@ -1,61 +1,81 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_LINKS } from "@/lib/content/nav";
+import { buildWhatsAppUrl } from "@/lib/utils";
 
-const SOCIAL_LINKS = [
-  { label: "WhatsApp", href: "https://wa.me/14328477432" },
-  { label: "Calendly", href: "https://calendly.com/gabriel-wealthyentrepreneur/30min" },
-];
+const WHATSAPP_URL = buildWhatsAppUrl(
+  "+14328477432",
+  "Hi Gapstech, I'd like to discuss a project"
+);
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-ink-border bg-ink-raised">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="flex flex-col items-start justify-between gap-8 md:flex-row">
-          <div>
-            <div className="flex items-center gap-3">
-              <Image src="/images/logo/gapstech-mark.png" alt="Gapstech" width={32} height={32} />
-              <span className="font-display text-base font-bold text-white">GAPSTECH</span>
-            </div>
-            <p className="mt-2 max-w-xs text-sm text-muted">Innovate. Build. Elevate.</p>
+    <footer className="border-t border-line bg-surface-sunken">
+      <div className="mx-auto max-w-shell px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <Link href="/" className="flex items-center gap-3" aria-label="Gapstech home">
+              <Image src="/images/logo/gapstech-mark.png" alt="" width={28} height={28} />
+              <span className="font-display text-base font-semibold tracking-tight">
+                Gapstech
+              </span>
+            </Link>
+            <p className="mt-5 font-display text-2xl font-semibold leading-tight text-muted">
+              Innovate. Build. Elevate.
+            </p>
           </div>
 
-          <div className="flex gap-12">
-            <div>
-              <h3 className="mb-3 text-sm font-semibold text-white">Navigate</h3>
-              <ul className="space-y-2">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-muted hover:text-red">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-3 text-sm font-semibold text-white">Connect</h3>
-              <ul className="space-y-2">
-                {SOCIAL_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted hover:text-red"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <nav className="md:col-span-4" aria-label="Footer">
+            <h2 className="font-mono text-meta uppercase text-faint">Sections</h2>
+            <ul className="mt-5 space-y-3">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="md:col-span-3">
+            <h2 className="font-mono text-meta uppercase text-faint">Direct</h2>
+            <ul className="mt-5 space-y-3">
+              <li>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted transition-colors hover:text-accent"
+                >
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/#contact"
+                  className="text-sm text-muted transition-colors hover:text-accent"
+                >
+                  Start a project
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <p className="mt-10 border-t border-ink-border pt-6 text-xs text-faint">
-          © {new Date().getFullYear()} Gapstech. All rights reserved.
-        </p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-mono text-meta uppercase text-faint">
+            © {year} Gapstech
+          </p>
+          <p className="font-mono text-meta uppercase text-faint">
+            AI Engineer &amp; No-Code/Low-Code Developer
+          </p>
+        </div>
       </div>
     </footer>
   );

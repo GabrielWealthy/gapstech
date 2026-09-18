@@ -1,16 +1,24 @@
 import Hero from "@/components/sections/Hero";
+import Problem from "@/components/sections/Problem";
+import Capabilities from "@/components/sections/Capabilities";
+import Practice from "@/components/sections/Practice";
+import Work from "@/components/sections/Work";
+import BuiltWith from "@/components/sections/BuiltWith";
 import About from "@/components/sections/About";
-import Projects from "@/components/sections/Projects";
-import Booking from "@/components/sections/Booking";
+import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <Problem />
+      <Capabilities />
+      <Practice />
+      <Work />
+      <BuiltWith />
       <About />
-      <Projects />
-      <Booking />
+      <FAQ />
       <Contact />
     </>
   );
