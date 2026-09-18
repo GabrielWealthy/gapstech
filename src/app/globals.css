@@ -156,9 +156,9 @@ a {
 /* Atmospheric film so flat black gains air */
 .bg-atmosphere {
   background-image: radial-gradient(
-    120% 80% at 50% -10%,
-    rgba(232, 38, 42, 0.1) 0%,
-    rgba(232, 38, 42, 0) 55%
+    90% 55% at 50% -12%,
+    rgba(232, 38, 42, 0.055) 0%,
+    rgba(232, 38, 42, 0) 60%
   );
 }
 

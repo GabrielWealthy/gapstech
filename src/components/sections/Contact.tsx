@@ -31,7 +31,7 @@ export default function Contact() {
           className="max-w-4xl font-display text-display-lg font-semibold"
         >
           Have a system that
-          <span className="block text-accent">needs to be built?</span>
+          <span className="block text-muted">needs to be built?</span>
         </motion.h2>
 
         <motion.p
