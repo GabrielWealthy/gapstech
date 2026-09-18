@@ -34,7 +34,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <ul className="hidden gap-8 md:flex">
+        <ul className="hidden gap-6 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link href={link.href} className="group relative text-sm text-muted transition-colors hover:text-white">
@@ -48,14 +48,14 @@ export default function Navbar() {
         <button
           type="button"
           aria-label="Toggle navigation"
-          className="text-white md:hidden"
+          className="text-white lg:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? "✕" : "☰"}
         </button>
       </nav>
 
-      <div className={cn("md:hidden", open ? "block" : "hidden")}>
+      <div className={cn("lg:hidden", open ? "block" : "hidden")}>
         <ul className="flex flex-col gap-1 border-t border-ink-border px-6 py-4">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
