@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { BIO } from "@/lib/content/bio";
-import { EASE, viewport } from "@/lib/motion";
+import { PORTRAITS } from "@/lib/content/portraits";
+import { EASE, viewport, clipUp } from "@/lib/motion";
+import RevealImage from "@/components/ui/RevealImage";
 
 const PROCESS = [
   {
@@ -28,48 +29,55 @@ const PROCESS = [
   },
 ];
 
+const LINES = ["I build systems", "that work", "for people."];
+
 export default function About() {
   return (
     <section id="about" className="relative border-t border-line py-28 md:py-40">
       <div className="mx-auto max-w-shell px-6">
-        <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* Editorial identity block */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="lg:col-span-5"
-          >
-            <h2 className="font-display text-display-lg font-semibold leading-[0.95]">
-              Gabriel
-            </h2>
-            <p className="mt-4 font-mono text-meta uppercase text-accent">
-              AI Engineer / System Builder
-            </p>
-
-            <div className="mt-10 flex items-center gap-4 border-t border-line pt-8">
-              <Image
-                src="/images/logo/gapstech-mark.png"
-                alt=""
-                width={40}
-                height={40}
-                className="opacity-80"
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+          {/* The portrait carries the section, not a paragraph */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <RevealImage
+                src={PORTRAITS.study.src}
+                alt={PORTRAITS.study.alt}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="aspect-[3/4] w-full"
               />
-              <p className="font-mono text-meta uppercase text-faint">
-                Founder, Gapstech
-              </p>
+              <div className="mt-5 flex items-baseline justify-between border-t border-line pt-4">
+                <p className="font-display text-lg font-semibold">Gabriel</p>
+                <p className="font-mono text-meta uppercase text-faint">
+                  Founder, Gapstech
+                </p>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Bio + process spine */}
           <div className="lg:col-span-7">
+            <h2 className="font-display text-display-md font-semibold">
+              {LINES.map((line, i) => (
+                <span key={line} className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
+                  <motion.span
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={viewport}
+                    variants={clipUp}
+                    transition={{ delay: i * 0.1 }}
+                    className={i === 2 ? "block text-muted" : "block"}
+                  >
+                    {line}
+                  </motion.span>
+                </span>
+              ))}
+            </h2>
+
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
-              transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
-              className="max-w-measure text-lg leading-relaxed text-muted"
+              transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+              className="mt-10 max-w-measure text-lg leading-relaxed text-muted"
             >
               {BIO}
             </motion.p>
@@ -82,7 +90,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewport}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                  className="group relative flex gap-6 border-b border-line py-7 md:gap-10"
+                  className="group flex gap-6 border-b border-line py-7 md:gap-10"
                 >
                   <span className="tnum font-mono text-meta uppercase text-faint transition-colors duration-300 group-hover:text-accent">
                     {item.step}

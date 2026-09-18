@@ -49,6 +49,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <head>
+        {/* Scroll reveals are driven by JS, so their initial state is
+            painted as hidden. Without JS that state would be permanent —
+            this restores the page rather than leaving it blank. */}
+        <noscript
+          // React escapes quotes inside <style> children, which would break
+          // these attribute selectors. The markup is a static authored string.
+          dangerouslySetInnerHTML={{
+            __html:
+              "<style>[style*='opacity:0']{opacity:1!important}[style*='clip-path']{clip-path:none!important}[style*='transform']{transform:none!important}</style>",
+          }}
+        />
+      </head>
       <body className="bg-background font-body text-foreground antialiased">
         <ScrollProgressBar />
         <Cursor />
