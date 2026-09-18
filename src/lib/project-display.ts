@@ -20,7 +20,7 @@ export function pickFeatured(projects: Project[]): {
    land in the field. A real tag is short and at most three words ("n8n",
    "Business Intelligence"); anything longer is a tagline and would render as a broken
    category row, so it is dropped rather than shown. */
-export function displayTags(tags: string[], limit = 5): string[] {
+export function displayTags(tags: string[], limit = 6): string[] {
   return tags
     .map((t) => t.trim())
     .filter((t) => t.length > 0 && t.length <= 24 && t.split(/\s+/).length <= 3)
