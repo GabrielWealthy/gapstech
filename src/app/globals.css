@@ -2,38 +2,197 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   GAPSTECH DESIGN TOKENS
+   Signal red on deep ink. Red is the only chromatic accent —
+   it earns attention because nothing else competes for it.
+   ============================================================ */
+
 :root {
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+  /* Surfaces — a real depth ladder, not one flat black */
+  --background: #07070a;
+  --surface: #0d0d11;
+  --surface-raised: #141419;
+  --surface-sunken: #050508;
+
+  /* Foreground */
+  --foreground: #f4f4f6;
+  --muted: #9b9ba6;
+  --faint: #7e7e8c;
+
+  /* Signal */
+  --accent: #e8262a;
+  --accent-bright: #ff3b3f;
+  --accent-dim: #b01f22;
+  --accent-wash: rgba(232, 38, 42, 0.08);
+
+  /* Editorial counterweight — warm bone against cold ink.
+     Used for display type and system linework so the red
+     never has to share the stage with another hue. */
+  --accent-secondary: #e6dfd3;
+
+  /* Structure */
+  --border: #1c1c23;
+  --border-strong: #2a2a33;
+  --hairline: rgba(244, 244, 246, 0.08);
+
+  /* Motion — one exponential ease, used everywhere */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+* {
+  border-color: var(--border);
 }
 
 html {
   scroll-behavior: smooth;
+  /* Anchor targets clear the fixed navbar */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
+/* Display type wants tight tracking and optical balance */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  letter-spacing: -0.035em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Tabular figures wherever numbers are compared */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ============================================================
+   BROWSER SURFACES
+   The parts we didn't draw still carry the design.
+   ============================================================ */
 
 ::selection {
-  background-color: #e8262a;
+  background-color: var(--accent);
   color: #ffffff;
 }
 
-/* respect reduced-motion users */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-sunken);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 2px solid var(--surface-sunken);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
+
+/* Firefox */
+html {
+  scrollbar-color: var(--border-strong) var(--surface-sunken);
+  scrollbar-width: thin;
+}
+
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+/* Fine technical grid — depth without decoration */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Atmospheric film so flat black gains air */
+.bg-atmosphere {
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    rgba(232, 38, 42, 0.1) 0%,
+    rgba(232, 38, 42, 0) 55%
+  );
+}
+
+/* Grain — kills banding on large dark gradients */
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Edge fade for marquees — content dissolves, never clips */
+.mask-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* visible keyboard focus, on brand */
-:focus-visible {
-  outline: 2px solid #e8262a;
-  outline-offset: 3px;
-  border-radius: 4px;
 }

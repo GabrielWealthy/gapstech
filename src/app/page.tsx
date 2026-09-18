@@ -1,24 +1,24 @@
 import Hero from "@/components/sections/Hero";
-import ValueProps from "@/components/sections/ValueProps";
-import Solutions from "@/components/sections/Solutions";
-import TechMarquee from "@/components/sections/TechMarquee";
+import Problem from "@/components/sections/Problem";
+import Capabilities from "@/components/sections/Capabilities";
+import Practice from "@/components/sections/Practice";
+import Work from "@/components/sections/Work";
+import BuiltWith from "@/components/sections/BuiltWith";
 import About from "@/components/sections/About";
-import Projects from "@/components/sections/Projects";
 import FAQ from "@/components/sections/FAQ";
-import Booking from "@/components/sections/Booking";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ValueProps />
-      <Solutions />
-      <TechMarquee />
+      <Problem />
+      <Capabilities />
+      <Practice />
+      <Work />
+      <BuiltWith />
       <About />
-      <Projects />
       <FAQ />
-      <Booking />
       <Contact />
     </>
   );

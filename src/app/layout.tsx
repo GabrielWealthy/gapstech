@@ -1,24 +1,38 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 import ScrollProgressBar from "@/components/layout/ScrollProgressBar";
+import Cursor from "@/components/layout/Cursor";
 
-const spaceGrotesk = Space_Grotesk({
+/* Display: editorial character at large sizes. Emphatically not Inter. */
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
+  display: "swap",
+  axes: ["opsz"],
 });
 
-const inter = Inter({
+/* Body: clean technical sans — engineered, not decorative. */
+const body = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
   weight: ["400", "500", "600"],
 });
 
+/* Mono: reserved for genuine metadata — indices, counts, measurements. */
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.gapstechs.com"),
   title: "Gapstech — Innovate. Build. Elevate.",
   description:
     "AI Engineer & No-Code/Low-Code Developer specializing in automation (n8n), cloud infrastructure (AWS), and CRM systems.",
@@ -32,15 +46,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="font-body bg-ink text-white antialiased">
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body className="bg-background font-body text-foreground antialiased">
         <ScrollProgressBar />
+        <Cursor />
         <Navbar />
         <main>{children}</main>
         <Footer />
