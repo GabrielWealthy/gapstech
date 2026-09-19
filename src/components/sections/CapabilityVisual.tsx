@@ -39,8 +39,10 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
           {[86, 110, 134].map((y) => (
             <line key={y} x1="167" y1={y} x2="257" y2="110" stroke={stroke} strokeWidth="0.75" opacity="0.55" />
           ))}
+          {/* cx/cy need initial values, or the first paint emits
+              "Expected length, undefined" for the attribute. */}
           <motion.circle
-            r="3" fill={hot}
+            r="3" fill={hot} cx={52} cy={70}
             animate={{ cx: [52, 160, 266], cy: [70, 110, 110] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           />

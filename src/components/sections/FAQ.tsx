@@ -11,19 +11,18 @@ export default function FAQ() {
   return (
     <section id="faq" className="relative border-t border-line py-28 md:py-40">
       <div className="mx-auto max-w-shell px-6">
-        <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="font-display text-display-md font-semibold lg:col-span-4"
-          >
-            Questions,
-            <span className="block text-muted">answered plainly</span>
-          </motion.h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="mx-auto max-w-xl text-center font-display text-display-sm font-semibold"
+        >
+          Questions, answered plainly
+        </motion.h2>
 
-          <dl className="border-t border-line lg:col-span-8">
+        <div className="mx-auto mt-16 max-w-3xl">
+          <dl className="border-t border-line">
             {FAQS.map((faq, i) => {
               const isOpen = open === i;
               return (

@@ -2,16 +2,19 @@ import Hero from "@/components/sections/Hero";
 import Problem from "@/components/sections/Problem";
 import Capabilities from "@/components/sections/Capabilities";
 import Practice from "@/components/sections/Practice";
-import BehindTheSystems from "@/components/sections/BehindTheSystems";
 import Work from "@/components/sections/Work";
 import BuiltWith from "@/components/sections/BuiltWith";
 import About from "@/components/sections/About";
+import Process from "@/components/sections/Process";
+import Interlude from "@/components/sections/Interlude";
 import FAQ from "@/components/sections/FAQ";
-import PersonalityMoment from "@/components/sections/PersonalityMoment";
 import Contact from "@/components/sections/Contact";
 
-/* Technology → work → person. The photographs are the pauses that keep
-   the page from reading as one long technical block. */
+/* Composition rhythm — no two adjacent sections share a layout:
+   hero asymmetric, problem full width, capabilities centred over
+   full-width rows, practice on a broken grid, work horizontal,
+   about compact with a small portrait, process a timeline,
+   interlude a statement with a detail, FAQ centred, CTA full width. */
 export default function Home() {
   return (
     <>
@@ -19,12 +22,12 @@ export default function Home() {
       <Problem />
       <Capabilities />
       <Practice />
-      <BehindTheSystems />
       <Work />
       <BuiltWith />
       <About />
+      <Process />
+      <Interlude />
       <FAQ />
-      <PersonalityMoment />
       <Contact />
     </>
   );

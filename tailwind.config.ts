@@ -49,8 +49,8 @@ const config: Config = {
       },
       fontSize: {
         // Dramatic display scale — clamped so it never overflows on mobile
-        "display-xl": ["clamp(2.5rem, 8.5vw, 7.5rem)", { lineHeight: "0.93", letterSpacing: "-0.045em" }],
-        "display-lg": ["clamp(2.5rem, 7.5vw, 6rem)", { lineHeight: "0.95", letterSpacing: "-0.04em" }],
+        "display-xl": ["clamp(2.25rem, 7vw, 6.5rem)", { lineHeight: "0.94", letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(2.25rem, 6vw, 5rem)", { lineHeight: "0.96", letterSpacing: "-0.035em" }],
         "display-md": ["clamp(2rem, 5vw, 3.75rem)", { lineHeight: "1.0", letterSpacing: "-0.035em" }],
         "display-sm": ["clamp(1.6rem, 3.2vw, 2.5rem)", { lineHeight: "1.08", letterSpacing: "-0.03em" }],
         meta: ["0.6875rem", { lineHeight: "1.2", letterSpacing: "0.18em" }],

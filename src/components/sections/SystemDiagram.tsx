@@ -40,19 +40,12 @@ export default function SystemDiagram({ className }: { className?: string }) {
       {/* Edges draw in, then carry a travelling pulse */}
       {EDGES.map((d, i) => (
         <g key={d}>
-          <motion.path
-            d={d}
-            stroke="var(--border-strong)"
-            strokeWidth="1"
-            initial={reduce ? undefined : { pathLength: 0, opacity: 0 }}
-            animate={reduce ? undefined : { pathLength: 1, opacity: 1 }}
-            transition={{ duration: 1.1, delay: 0.5 + i * 0.09, ease: EASE }}
-          />
+          <path d={d} stroke="var(--line-strong)" strokeWidth="1.6" />
           {!reduce && (
             <motion.path
               d={d}
               stroke="var(--accent)"
-              strokeWidth="1.5"
+              strokeWidth="2.2"
               strokeLinecap="round"
               pathLength={1}
               strokeDasharray="0.14 0.86"
@@ -72,13 +65,7 @@ export default function SystemDiagram({ className }: { className?: string }) {
 
       {/* Nodes */}
       {NODES.map((n, i) => (
-        <motion.g
-          key={n.id}
-          initial={reduce ? undefined : { opacity: 0, scale: 0.7 }}
-          animate={reduce ? undefined : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.35 + i * 0.08, ease: EASE }}
-          style={{ transformOrigin: `${n.x}px ${n.y}px` }}
-        >
+        <g key={n.id}>
           {n.core ? (
             <>
               <rect
@@ -111,10 +98,10 @@ export default function SystemDiagram({ className }: { className?: string }) {
             <circle
               cx={n.x}
               cy={n.y}
-              r="21"
+              r="23"
               fill="var(--surface-raised)"
-              stroke="var(--border-strong)"
-              strokeWidth="1"
+              stroke="var(--faint)"
+              strokeWidth="1.6"
             />
           )}
           <text
@@ -122,13 +109,13 @@ export default function SystemDiagram({ className }: { className?: string }) {
             y={n.y + 3.5}
             textAnchor="middle"
             className="font-mono"
-            fontSize="9"
+            fontSize="13"
             letterSpacing="0.06em"
             fill={n.core ? "var(--accent)" : "var(--muted)"}
           >
             {n.label}
           </text>
-        </motion.g>
+        </g>
       ))}
     </svg>
   );
