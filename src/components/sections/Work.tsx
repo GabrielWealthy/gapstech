@@ -8,7 +8,7 @@ export default async function Work() {
   const { featured, rest } = pickFeatured(projects);
 
   return (
-    <section id="projects" className="relative border-t border-line py-28 md:py-40">
+    <section id="projects" className="relative border-t border-line py-32 md:py-48">
       <div className="mx-auto max-w-shell px-6">
         {/* Small label rather than another large left-aligned heading */}
         <p className="font-mono text-meta uppercase text-faint">Selected work</p>

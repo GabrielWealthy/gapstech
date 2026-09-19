@@ -9,7 +9,7 @@ import RevealImage from "@/components/ui/RevealImage";
    detail beside the statement — roughly a fifth of the composition. */
 export default function Interlude() {
   return (
-    <section className="relative border-t border-line py-24 md:py-32">
+    <section className="relative border-t border-line py-16 md:py-24">
       <div className="mx-auto max-w-shell px-6">
         <div className="grid items-center gap-10 lg:grid-cols-12">
           <h2 className="font-display text-display-sm font-semibold lg:col-span-8">

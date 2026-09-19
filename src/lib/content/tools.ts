@@ -1,17 +1,16 @@
+/* The stack that actually appears in the work. Kept short deliberately —
+   this line supports credibility, it is not a skills dump. */
 export const TOOLS = [
   "n8n",
-  "Bubble.io",
+  "Bubble",
   "FlutterFlow",
   "AWS",
   "GoHighLevel",
   "Vercel",
-  "Netlify",
   "Supabase",
   "OpenAI",
-  "Anthropic Claude",
+  "Anthropic",
   "Zapier",
   "Figma",
-  "Google Workspace",
-  "Calendly",
   "Stripe",
 ];

@@ -13,9 +13,10 @@ export default function BuiltWith() {
             <span
               key={`${tool}-${i}`}
               aria-hidden={i >= TOOLS.length}
-              className="whitespace-nowrap font-mono text-meta uppercase text-faint"
+              className="flex items-center gap-10 whitespace-nowrap font-mono text-meta uppercase text-faint"
             >
               {tool}
+              <span aria-hidden="true" className="text-line-strong">·</span>
             </span>
           ))}
         </div>
