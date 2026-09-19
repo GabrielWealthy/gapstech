@@ -6,6 +6,9 @@ import { CAPABILITIES } from "@/lib/content/capabilities";
 import { EASE, viewport } from "@/lib/motion";
 import CapabilityVisual from "@/components/sections/CapabilityVisual";
 
+/* Centered heading, then full-width rows. The visualization overlaps the
+   rows from the right rather than occupying its own column, so this
+   section does not repeat the two-column template. */
 export default function Capabilities() {
   const [active, setActive] = useState(0);
   const current = CAPABILITIES[active];
@@ -14,36 +17,46 @@ export default function Capabilities() {
     <section id="capabilities" className="relative border-t border-line py-28 md:py-40">
       <div className="mx-auto max-w-shell px-6">
         <motion.h2
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.7, ease: EASE }}
-          className="max-w-3xl font-display text-display-md font-semibold"
+          className="mx-auto max-w-2xl text-center font-display text-display-md font-semibold"
         >
           What I actually do
         </motion.h2>
 
-        <div className="mt-16 grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* The list carries the section. Rows, not cards. */}
-          <ul className="lg:col-span-7">
+        <div className="relative mt-20">
+          {/* Overlapping visual — sits behind the rows, never blocks them */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[34%] items-center lg:flex">
+            <AnimatePresence mode="wait">
+              <motion.div key={current.kind} className="w-full opacity-60">
+                <CapabilityVisual kind={current.kind} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <ul className="relative">
             {CAPABILITIES.map((cap, i) => {
               const isActive = i === active;
               return (
                 <motion.li
                   key={cap.index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewport}
-                  transition={{ duration: 0.6, delay: i * 0.05, ease: EASE }}
+                  transition={{ duration: 0.55, delay: i * 0.05, ease: EASE }}
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
-                  className="group border-b border-line"
+                  className="border-b border-line first:border-t"
                 >
                   <button
                     type="button"
                     onClick={() => setActive(i)}
                     aria-expanded={isActive}
-                    className="flex w-full items-baseline gap-5 py-7 text-left md:gap-8"
+                    className={`flex w-full items-baseline gap-6 py-8 text-left transition-[padding] duration-500 ease-out md:gap-10 ${
+                      isActive ? "md:pl-6" : "md:pl-0"
+                    }`}
                   >
                     <span
                       className={`tnum font-mono text-meta uppercase transition-colors duration-300 ${
@@ -55,7 +68,7 @@ export default function Capabilities() {
 
                     <span className="flex-1">
                       <span
-                        className={`block font-display text-display-sm font-semibold transition-colors duration-300 ${
+                        className={`block font-display text-3xl font-semibold transition-colors duration-300 md:text-4xl ${
                           isActive ? "text-foreground" : "text-muted"
                         }`}
                       >
@@ -68,18 +81,15 @@ export default function Capabilities() {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.45, ease: EASE }}
+                            transition={{ duration: 0.4, ease: EASE }}
                             className="block overflow-hidden"
                           >
-                            <span className="block pt-3 text-base text-muted">
+                            <span className="block max-w-md pt-3 text-base text-muted">
                               {cap.blurb}
                             </span>
-                            <span className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                            <span className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
                               {cap.items.map((item) => (
-                                <span
-                                  key={item}
-                                  className="font-mono text-meta uppercase text-faint"
-                                >
+                                <span key={item} className="font-mono text-meta uppercase text-faint">
                                   {item}
                                 </span>
                               ))}
@@ -90,8 +100,9 @@ export default function Capabilities() {
                     </span>
 
                     <span
-                      className={`mt-1 h-px w-8 shrink-0 transition-all duration-500 ease-out ${
-                        isActive ? "w-14 bg-accent" : "bg-line-strong"
+                      aria-hidden="true"
+                      className={`mt-2 h-px shrink-0 transition-all duration-500 ease-out ${
+                        isActive ? "w-16 bg-accent" : "w-6 bg-line-strong"
                       }`}
                     />
                   </button>
@@ -99,25 +110,6 @@ export default function Capabilities() {
               );
             })}
           </ul>
-
-          {/* The visualization answers the hovered row */}
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-32">
-              <div className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8">
-                <div className="bg-grid pointer-events-none absolute inset-0 opacity-40" />
-                <div className="relative">
-                  <AnimatePresence mode="wait">
-                    <CapabilityVisual key={current.kind} kind={current.kind} />
-                  </AnimatePresence>
-                </div>
-              </div>
-              <p className="mt-5 font-mono text-meta uppercase text-faint">
-                <span className="tnum text-accent">{current.index}</span>
-                <span className="px-2 text-line-strong">/</span>
-                {current.title}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
