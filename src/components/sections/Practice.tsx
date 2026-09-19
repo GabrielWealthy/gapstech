@@ -7,7 +7,7 @@ import { EASE, viewport } from "@/lib/motion";
 /* Deliberate grid-breaking: each group sits at a different column start,
    span and vertical offset. No cards, no repeating row. */
 const PLACEMENT: Record<string, string> = {
-  AUTOMATION: "lg:col-start-1 lg:col-span-5",
+  AUTOMATION: "lg:col-start-1 lg:col-span-5 lg:row-start-1",
   AI: "lg:col-start-8 lg:col-span-5 lg:mt-24",
   "NO-CODE": "lg:col-start-2 lg:col-span-5 lg:mt-16",
   CRM: "lg:col-start-8 lg:col-span-4 lg:mt-4",
@@ -21,21 +21,21 @@ export default function Practice() {
   }, {});
 
   return (
-    <section id="solutions" className="relative border-t border-line py-28 md:py-40">
+    <section id="solutions" className="relative border-t border-line py-32 md:py-44">
       <div className="mx-auto max-w-shell px-6">
         {/* Small label, right-aligned — a different heading position again */}
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={viewport}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="ml-auto max-w-sm text-right font-display text-2xl font-semibold md:text-3xl"
-        >
-          What that looks like
-          <span className="block text-muted">in practice</span>
-        </motion.h2>
+        <div className="grid gap-x-10 gap-y-20 lg:grid-cols-12">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewport}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="font-display text-2xl font-semibold md:text-3xl lg:col-span-4 lg:col-start-9 lg:text-right"
+          >
+            What that looks like
+            <span className="block text-muted">in practice</span>
+          </motion.h2>
 
-        <div className="mt-24 grid gap-x-10 gap-y-20 lg:grid-cols-12">
           {Object.entries(groups).map(([category, items], gi) => (
             <motion.div
               key={category}

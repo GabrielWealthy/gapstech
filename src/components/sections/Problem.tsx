@@ -15,9 +15,9 @@ const SEAMS = [
    are the only things styled differently. */
 export default function Problem() {
   return (
-    <section className="relative border-t border-line py-28 md:py-40">
+    <section className="relative border-t border-line py-40 md:py-60">
       <div className="mx-auto max-w-shell px-6">
-        <h2 className="font-display text-display-lg font-semibold">
+        <h2 className="font-display text-display-xl font-semibold">
           <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
             <motion.span initial="hidden" whileInView="show" viewport={viewport} variants={clipUp} className="block">
               Most businesses don&apos;t have
@@ -53,7 +53,7 @@ export default function Problem() {
           whileInView={{ opacity: 1 }}
           viewport={viewport}
           transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
-          className="mt-20 flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-8"
+          className="mt-24 flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-8"
         >
           {SEAMS.map((seam, i) => (
             <motion.li

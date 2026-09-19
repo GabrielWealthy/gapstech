@@ -14,7 +14,7 @@ export default function Capabilities() {
   const current = CAPABILITIES[active];
 
   return (
-    <section id="capabilities" className="relative border-t border-line py-28 md:py-40">
+    <section id="capabilities" className="relative border-t border-line py-24 md:py-32">
       <div className="mx-auto max-w-shell px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

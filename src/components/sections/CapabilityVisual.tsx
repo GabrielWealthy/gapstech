@@ -42,7 +42,8 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
           {/* cx/cy need initial values, or the first paint emits
               "Expected length, undefined" for the attribute. */}
           <motion.circle
-            r="3" fill={hot} cx={52} cy={70}
+            r="3" fill={hot}
+            initial={{ cx: 52, cy: 70 }}
             animate={{ cx: [52, 160, 266], cy: [70, 110, 110] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -59,6 +60,7 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
           ))}
           <motion.rect
             y="92" width="52" height="36" rx="8" fill="var(--accent-wash)" stroke={hot} strokeWidth="1.25"
+            initial={{ x: 26 }}
             animate={{ x: [26, 100, 174, 248] }}
             transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -72,6 +74,7 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
               key={i}
               x={80} y={48 + i * 34} width="160" height="26" rx="5"
               stroke={i === 0 ? hot : stroke} strokeWidth="1.25"
+              initial={{ x: 80 }}
               animate={{ x: [80, 80 + (i - 1.5) * 10, 80] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
             />
@@ -91,6 +94,7 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
           ))}
           <motion.rect
             x="190" y="62" width="80" height="14" rx="4" fill="var(--accent-wash)" stroke={hot} strokeWidth="1"
+            initial={{ y: 62 }}
             animate={{ y: [62, 92, 122, 62] }}
             transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
           />

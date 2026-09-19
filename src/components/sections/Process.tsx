@@ -22,7 +22,7 @@ export default function Process() {
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section className="relative border-t border-line py-28 md:py-40">
+    <section className="relative border-t border-line py-20 md:py-28">
       <div className="mx-auto max-w-shell px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
