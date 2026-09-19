@@ -15,18 +15,4 @@ export const PORTRAITS = {
     height: 1280,
     alt: "Gabriel seated in his study",
   },
-  /* Considered, head down — a quieter beat. */
-  considered: {
-    src: "/images/gabriel/gabriel-considered.jpg",
-    width: 1195,
-    height: 1280,
-    alt: "Gabriel, arms folded, in thought",
-  },
-  /* Outdoors, jacket over the shoulder — the personality moment. */
-  outdoor: {
-    src: "/images/gabriel/gabriel-outdoor.jpg",
-    width: 960,
-    height: 1280,
-    alt: "Gabriel outdoors, jacket over one shoulder",
-  },
 } as const;

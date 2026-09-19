@@ -7,7 +7,6 @@ import Work from "@/components/sections/Work";
 import BuiltWith from "@/components/sections/BuiltWith";
 import About from "@/components/sections/About";
 import FAQ from "@/components/sections/FAQ";
-import PersonalityMoment from "@/components/sections/PersonalityMoment";
 import Contact from "@/components/sections/Contact";
 
 /* Technology → work → person. The photographs are the pauses that keep
@@ -24,7 +23,6 @@ export default function Home() {
       <BuiltWith />
       <About />
       <FAQ />
-      <PersonalityMoment />
       <Contact />
     </>
   );
