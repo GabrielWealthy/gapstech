@@ -8,12 +8,12 @@ export default function BuiltWith() {
   return (
     <section className="relative overflow-hidden border-t border-line py-12">
       <div className="mask-edges flex">
-        <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10 motion-reduce:animate-none">
+        <div className="flex shrink-0 animate-marquee items-center gap-20 pr-20 motion-reduce:animate-none">
           {[...TOOLS, ...TOOLS].map((tool, i) => (
             <span
               key={`${tool}-${i}`}
               aria-hidden={i >= TOOLS.length}
-              className="flex items-center gap-10 whitespace-nowrap font-mono text-meta uppercase text-faint"
+              className="flex items-center gap-20 whitespace-nowrap font-mono text-meta uppercase text-faint"
             >
               {tool}
               <span aria-hidden="true" className="text-line-strong">·</span>
