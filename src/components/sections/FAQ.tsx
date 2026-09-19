@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FAQS } from "@/lib/content/faq";
 import { EASE, viewport } from "@/lib/motion";
 
@@ -65,21 +65,19 @@ export default function FAQ() {
                     </button>
                   </dt>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.dd
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.45, ease: EASE }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-measure pb-8 leading-relaxed text-muted">
-                          {faq.answer}
-                        </p>
-                      </motion.dd>
-                    )}
-                  </AnimatePresence>
+                  {/* Always rendered. Mounting the answer only on open kept
+                      four of five answers out of the server HTML, so anything
+                      that does not run JavaScript never saw them. */}
+                  <motion.dd
+                    initial={false}
+                    animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                    transition={{ duration: 0.45, ease: EASE }}
+                    className="overflow-hidden"
+                  >
+                    <p className="max-w-measure pb-8 leading-relaxed text-muted">
+                      {faq.answer}
+                    </p>
+                  </motion.dd>
                 </motion.div>
               );
             })}
