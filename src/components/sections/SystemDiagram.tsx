@@ -40,7 +40,7 @@ export default function SystemDiagram({ className }: { className?: string }) {
       {/* Edges draw in, then carry a travelling pulse */}
       {EDGES.map((d, i) => (
         <g key={d}>
-          <path d={d} stroke="var(--line-strong)" strokeWidth="1.6" />
+          <path d={d} stroke="var(--border-strong)" strokeWidth="1.6" />
           {!reduce && (
             <motion.path
               d={d}
