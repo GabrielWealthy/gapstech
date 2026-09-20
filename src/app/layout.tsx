@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 import ScrollProgressBar from "@/components/layout/ScrollProgressBar";
 import Cursor from "@/components/layout/Cursor";
+import SiteChrome from "@/components/layout/SiteChrome";
 
 /* Display: editorial character at large sizes. Emphatically not Inter. */
 const display = Bricolage_Grotesque({
@@ -63,12 +64,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-background font-body text-foreground antialiased">
-        <ScrollProgressBar />
-        <Cursor />
-        <Navbar />
+        <SiteChrome>
+          <ScrollProgressBar />
+          <Cursor />
+          <Navbar />
+        </SiteChrome>
+
         <main>{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+
+        <SiteChrome>
+          <Footer />
+          <FloatingWhatsApp />
+        </SiteChrome>
       </body>
     </html>
   );
