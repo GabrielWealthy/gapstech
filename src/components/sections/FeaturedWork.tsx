@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Project } from "@/lib/projects";
 import { displayTags, distinctRepoUrl } from "@/lib/project-display";
 import { EASE, viewport, clipUp } from "@/lib/motion";
@@ -13,12 +12,6 @@ import MagneticButton from "@/components/ui/MagneticButton";
 /* Horizontal case study: statement, then the product at full width, then
    metadata. No heading-beside-content column. */
 export default function FeaturedWork({ project }: { project: Project }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-5%", "5%"]);
-
   const tags = displayTags(project.tags);
   const repo = distinctRepoUrl(project);
   const titleWords = project.title.split(" ");
@@ -26,7 +19,7 @@ export default function FeaturedWork({ project }: { project: Project }) {
   const tail = titleWords[titleWords.length - 1];
 
   return (
-    <div ref={ref}>
+    <div>
       <div className="grid items-end gap-x-10 gap-y-6 lg:grid-cols-12">
         <h3 className="font-display text-display-md font-semibold lg:col-span-7">
           <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
@@ -81,7 +74,7 @@ export default function FeaturedWork({ project }: { project: Project }) {
 
           <div className="relative aspect-[16/9] overflow-hidden bg-surface-sunken">
             {project.coverImageUrl ? (
-              <motion.div style={{ y }} className="absolute inset-0 scale-105">
+              <div className="absolute inset-0">
                 <Image
                   src={project.coverImageUrl}
                   alt={`${project.title} interface`}
@@ -89,7 +82,7 @@ export default function FeaturedWork({ project }: { project: Project }) {
                   sizes="(max-width: 1024px) 100vw, 90vw"
                   className="object-cover object-top"
                 />
-              </motion.div>
+              </div>
             ) : (
               <ProjectCoverArt tags={project.tags} />
             )}
