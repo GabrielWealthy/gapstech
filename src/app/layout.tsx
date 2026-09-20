@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           // these attribute selectors. The markup is a static authored string.
           dangerouslySetInnerHTML={{
             __html:
-              "<style>[style*='opacity:0']{opacity:1!important}[style*='clip-path']{clip-path:none!important}[style*='transform']{transform:none!important}</style>",
+              "<style>[style*='opacity:0']{opacity:1!important}[style*='clip-path']{clip-path:none!important}[style*='transform']{transform:none!important}[style*='height:0']{height:auto!important;overflow:visible!important}</style>",
           }}
         />
       </head>
