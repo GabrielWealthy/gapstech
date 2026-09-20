@@ -50,6 +50,74 @@ export default function CapabilityVisual({ kind }: { kind: CapabilityKind }) {
         </g>
       )}
 
+      {kind === "ainative" && (
+        <g>
+          {/* idea -> prototype -> build -> backend -> automation -> deploy
+              -> iterate, and iterate feeds back into idea. The loop is the
+              point: this is a workflow, not a set of tools. */}
+          {[
+            { x: 48,  y: 46,  label: "IDEA" },
+            { x: 160, y: 46,  label: "PROTOTYPE" },
+            { x: 272, y: 46,  label: "BUILD" },
+            { x: 272, y: 116, label: "BACKEND" },
+            { x: 160, y: 116, label: "AUTOMATION" },
+            { x: 48,  y: 116, label: "DEPLOY" },
+            { x: 160, y: 186, label: "ITERATE" },
+          ].map((n, i) => (
+            <g key={n.label}>
+              <circle
+                cx={n.x}
+                cy={n.y}
+                r="5.5"
+                fill={i === 6 ? "var(--accent)" : "var(--surface-raised)"}
+                stroke={i === 6 ? hot : stroke}
+                strokeWidth="1.25"
+              />
+              <text
+                x={n.x}
+                y={n.y + 20}
+                textAnchor="middle"
+                className="font-mono"
+                fontSize="8.5"
+                letterSpacing="0.1em"
+                fill={dim}
+              >
+                {n.label}
+              </text>
+            </g>
+          ))}
+
+          {/* forward path, drawn as one serpentine run */}
+          <path
+            d="M 54 46 H 154 M 166 46 H 266 M 272 52 V 110 M 266 116 H 166 M 154 116 H 54 M 48 122 C 48 170, 100 186, 154 186"
+            stroke={stroke}
+            strokeWidth="1.25"
+            fill="none"
+          />
+
+          {/* the return: iterate feeds the next idea */}
+          <path
+            d="M 166 186 C 250 186, 300 150, 300 96 C 300 40, 240 22, 160 22 C 100 22, 60 28, 48 40"
+            stroke={hot}
+            strokeWidth="1.25"
+            strokeDasharray="3 4"
+            fill="none"
+            opacity="0.6"
+          />
+
+          <motion.circle
+            r="3"
+            fill={hot}
+            initial={{ cx: 48, cy: 46 }}
+            animate={{
+              cx: [48, 160, 272, 272, 160, 48, 160, 48],
+              cy: [46, 46, 46, 116, 116, 116, 186, 46],
+            }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </g>
+      )}
+
       {kind === "automation" && (
         <g>
           {[0, 1, 2, 3].map((i) => (

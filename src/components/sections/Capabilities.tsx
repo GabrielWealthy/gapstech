@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { CAPABILITIES } from "@/lib/content/capabilities";
 import { EASE, viewport } from "@/lib/motion";
 import CapabilityVisual from "@/components/sections/CapabilityVisual";
@@ -29,11 +29,13 @@ export default function Capabilities() {
         <div className="relative mt-20">
           {/* Overlapping visual — sits behind the rows, never blocks them */}
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[34%] items-center lg:flex">
-            <AnimatePresence mode="wait">
-              <motion.div key={current.kind} className="w-full opacity-60">
-                <CapabilityVisual kind={current.kind} />
-              </motion.div>
-            </AnimatePresence>
+            {/* No AnimatePresence: mode="wait" holds the new visual until the
+                old one finishes exiting, which strands the diagram on the
+                previous capability if that exit never runs. The visual fades
+                itself in on mount instead. */}
+            <div className="w-full opacity-60">
+              <CapabilityVisual key={current.kind} kind={current.kind} />
+            </div>
           </div>
 
           <ul className="relative">
@@ -75,28 +77,19 @@ export default function Capabilities() {
                         {cap.title}
                       </span>
 
-                      <AnimatePresence initial={false}>
-                        {isActive && (
-                          <motion.span
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.4, ease: EASE }}
-                            className="block overflow-hidden"
-                          >
-                            <span className="block max-w-md pt-3 text-base text-muted">
-                              {cap.blurb}
-                            </span>
-                            <span className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
-                              {cap.items.map((item) => (
-                                <span key={item} className="font-mono text-meta uppercase text-faint">
-                                  {item}
-                                </span>
-                              ))}
-                            </span>
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
+                      {/* Always rendered. Mounting a description only while
+                          its row is active kept six of seven out of the
+                          server HTML, so crawlers saw one capability. */}
+                      <motion.span
+                        initial={false}
+                        animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: EASE }}
+                        className="block overflow-hidden"
+                      >
+                        <span className="block max-w-md pt-3 text-base text-muted">
+                          {cap.blurb}
+                        </span>
+                      </motion.span>
                     </span>
 
                     <span

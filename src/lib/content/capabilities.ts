@@ -1,5 +1,6 @@
 export type CapabilityKind =
   | "ai"
+  | "ainative"
   | "automation"
   | "fullstack"
   | "nocode"
@@ -11,50 +12,53 @@ export type Capability = {
   title: string;
   kind: CapabilityKind;
   blurb: string;
-  items: string[];
 };
 
+/* Each line is the capability's own description — the tools live inside the
+   sentence rather than in a separate metadata row, so the section reads as
+   workflow rather than as a collection of logos. */
 export const CAPABILITIES: Capability[] = [
   {
     index: "01",
     title: "AI Engineering",
     kind: "ai",
-    blurb: "Systems that reason over your business context, not a generic chatbot.",
-    items: ["AI agents", "LLM integrations", "AI workflows", "Intelligent automation"],
+    blurb: "Build intelligent systems and AI-powered workflows.",
   },
   {
     index: "02",
-    title: "Automation",
-    kind: "automation",
-    blurb: "The manual steps between your tools, removed.",
-    items: ["n8n", "Make", "Zapier", "Business process automation"],
+    title: "AI-Assisted Development",
+    kind: "ainative",
+    blurb:
+      "Build and ship applications using Claude Code, Lovable, Supabase and modern AI coding workflows.",
   },
   {
     index: "03",
-    title: "Full-Stack",
-    kind: "fullstack",
-    blurb: "When the no-code ceiling is reached, the build continues in code.",
-    items: ["React", "Next.js", "Supabase", "APIs"],
+    title: "Automation",
+    kind: "automation",
+    blurb: "Connect business systems, APIs, CRMs and AI agents.",
   },
   {
     index: "04",
-    title: "No-Code / Low-Code",
-    kind: "nocode",
-    blurb: "Production apps in weeks, without a year of engineering payroll.",
-    items: ["Bubble", "FlutterFlow"],
+    title: "Full-Stack Development",
+    kind: "fullstack",
+    blurb: "React, Next.js, APIs, databases and production applications.",
   },
   {
     index: "05",
-    title: "Cloud",
-    kind: "cloud",
-    blurb: "Infrastructure that holds when the traffic actually arrives.",
-    items: ["AWS", "Vercel", "Netlify"],
+    title: "No-Code / Low-Code",
+    kind: "nocode",
+    blurb: "Bubble, FlutterFlow, Make and GoHighLevel.",
   },
   {
     index: "06",
+    title: "Cloud & Infrastructure",
+    kind: "cloud",
+    blurb: "AWS, Vercel, deployment, hosting and system infrastructure.",
+  },
+  {
+    index: "07",
     title: "CRM Systems",
     kind: "crm",
-    blurb: "Pipelines and lead systems that the team will genuinely use.",
-    items: ["GoHighLevel", "CRM automation", "Lead systems"],
+    blurb: "GoHighLevel, lead routing, pipelines and automated workflows.",
   },
 ];
